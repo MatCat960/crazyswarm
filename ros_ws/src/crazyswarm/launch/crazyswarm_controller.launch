@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="cf1" default="1"/>
+  <arg name="cf2" default="0"/>
+  <arg name="cf3" default="0"/>
+  <arg name="cf4" default="0"/>
+  <arg name="cf5" default="0"/>
+  <arg name="cf6" default="0"/>
+
+
+  <node if="$(arg cf1)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf1">
+    <remap from="/stop" to="/cf1/stop"/>
+    <remap from="/controller/takeoff" to="/cf1/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf1/controller/land"/>
+    <remap from="/controller/go_to" to="/cf1/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf1/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf1/takeoff"/>
+    <remap from="/land" to="/cf1/land"/>
+    <remap from="/go_to" to="/cf1/go_to"/>
+  </node> 
+  
+  <node if="$(arg cf2)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf2">
+    <remap from="/stop" to="/cf2/stop"/>
+    <remap from="/controller/takeoff" to="/cf2/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf2/controller/land"/>
+    <remap from="/controller/go_to" to="/cf2/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf2/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf2/takeoff"/>
+    <remap from="/land" to="/cf2/land"/>
+    <remap from="/go_to" to="/cf2/go_to"/>
+  </node>
+
+  <node if="$(arg cf3)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf3">
+    <remap from="/stop" to="/cf3/stop"/>
+    <remap from="/controller/takeoff" to="/cf3/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf3/controller/land"/>
+    <remap from="/controller/go_to" to="/cf3/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf3/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf3/takeoff"/>
+    <remap from="/land" to="/cf3/land"/>
+    <remap from="/go_to" to="/cf3/go_to"/>
+  </node>
+
+  <node if="$(arg cf4)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf4">
+    <remap from="/stop" to="/cf4/stop"/>
+    <remap from="/controller/takeoff" to="/cf4/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf4/controller/land"/>
+    <remap from="/controller/go_to" to="/cf4/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf4/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf4/takeoff"/>
+    <remap from="/land" to="/cf4/land"/>
+    <remap from="/go_to" to="/cf4/go_to"/>
+  </node>
+
+  <node if="$(arg cf5)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf5">
+    <remap from="/stop" to="/cf5/stop"/>
+    <remap from="/controller/takeoff" to="/cf5/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf5/controller/land"/>
+    <remap from="/controller/go_to" to="/cf5/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf5/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf5/takeoff"/>
+    <remap from="/land" to="/cf5/land"/>
+    <remap from="/go_to" to="/cf5/go_to"/>
+  </node>
+
+  <node if="$(arg cf6)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf6">
+    <remap from="/stop" to="/cf6/stop"/>
+    <remap from="/controller/takeoff" to="/cf6/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf6/controller/land"/>
+    <remap from="/controller/go_to" to="/cf6/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf6/controller/cmd_vel"/>
+    <remap from="/takeoff" to="/cf6/takeoff"/>
+    <remap from="/land" to="/cf6/land"/>
+    <remap from="/go_to" to="/cf6/go_to"/>
+  </node>
+
+</launch>

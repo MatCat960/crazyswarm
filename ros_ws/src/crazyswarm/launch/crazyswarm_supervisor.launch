@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="crazyswarm_supervisor"  pkg="crazyswarm" type="crazyswarm_supervisor" output="screen">
+        <rosparam>
+            ids: [1,2,3,4]
+            ROBOTS_NUM: 4
+            ROBOT_RANGE: 3.0
+            AREA_SIZE_x: 3.0  
+            AREA_SIZE_y: 3.0
+            AREA_LEFT: -1.5
+            AREA_BOTTOM: -1.5
+            ROBOT_FOV: 70.0
+            SAVE_POS: false
+        </rosparam>
+        </node>
+    </launch>

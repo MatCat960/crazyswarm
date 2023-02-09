@@ -188,6 +188,26 @@ target_link_libraries(mocap_helper
   libmotioncapture
 )
 
+## Declare a cpp executable
+add_executable(cmdpos_test src/cmdpos_test.cpp)
+add_dependencies(cmdpos_test crazyswarm_gencpp)
+target_link_libraries(cmdpos_test ${catkin_LIBRARIES} libmotioncapture)
+
+## Declare a cpp executable
+add_executable(cmdvel_test src/cmdvel_test.cpp)
+add_dependencies(cmdvel_test crazyswarm_gencpp)
+target_link_libraries(cmdvel_test ${catkin_LIBRARIES} libmotioncapture)
+
+## Declare a cpp executable
+add_executable(crazyswarm_supervisor src/crazyswarm_supervisor.cpp)
+add_dependencies(crazyswarm_supervisor crazyswarm_gencpp)
+target_link_libraries(crazyswarm_supervisor ${catkin_LIBRARIES} libmotioncapture)
+
+## Declare a cpp executable
+add_executable(crazyswarm_controller src/crazyswarm_controller.cpp)
+add_dependencies(crazyswarm_controller crazyswarm_gencpp)
+target_link_libraries(crazyswarm_controller ${catkin_LIBRARIES} libmotioncapture)
+
 #############
 ## Install ##
 #############
