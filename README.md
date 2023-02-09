@@ -30,10 +30,4 @@ Conversion from standard ROS messages to custom crazyswarm messages. Allows both
 
 - `crazyswarm_supervisor.launch`
 VIsion-based relative localization emulation using OptiTrack. A topic is published for each robot, containing relative position of detected neighbors (undetected neighbors have a fake position of *(x,y) = (100.0, 100.0)* ).
-It requires parameters indicating drone's field of view  range and angle.## Added Features
-- `crazyswarm_controller.launch`
-Conversion from standard ROS messages to custom crazyswarm messages. Allows both position and velocity drones control.
-
-- `crazyswarm_supervisor.launch`
-VIsion-based relative localization emulation using OptiTrack. A topic is published for each robot, containing relative position of detected neighbors (undetected neighbors have a fake position of *(x,y) = (100.0, 100.0)* ).
 It requires parameters indicating drone's field of view  range and angle.
