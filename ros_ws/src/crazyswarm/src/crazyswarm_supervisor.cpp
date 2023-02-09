@@ -74,8 +74,7 @@ public:
         //--------------------------------------------------- Subscribers and Publishers ----------------------------------------------------
         for (int i = 1; i < ROBOTS_NUM+1; i++)
         {
-            // TODONYU: change the topic name to match the one you use
-            // poseSub_.push_back(nh_.subscribe<nav_msgs::Odometry>("/turtlebot" + std::to_string(i) + "/odom", 1, std::bind(&Controller::poseCallback, this, i, std::placeholders::_1)));
+            realposePub_.push_back(nh_.advertise<geometry_msgs::Pose>("/supervisor/robot" + std::to_string(i) + "/realpose", 1));
             neighposePub_.push_back(nh_.advertise<geometry_msgs::PoseArray>("/supervisor/robot" + std::to_string(i) + "/pose", 1));
         }
         controller_timer_ = nh_.createTimer(ros::Duration(0.1), std::bind(&Controller::Emulate_Vision, this));
@@ -128,7 +127,7 @@ private:
     //-----------------------------------------------------------------------------------
     //------------------------- Publishers and subscribers ------------------------------
     std::vector<ros::Publisher> neighposePub_;
-    std::vector<ros::Subscriber> poseSub_;
+    std::vector<ros::Publisher> realposePub_;
     ros::Timer controller_timer_;
     tf::TransformListener listener_;
     //-----------------------------------------------------------------------------------
@@ -151,7 +150,7 @@ void Controller::stop()
         ROS_INFO("Saving final position of robots");
         std::ofstream myfile;
         myfile.open ("/home/mattia/final_pos.txt");
-        for (int i = 1; i < ROBOTS_NUM+1; i++)
+        for (int i = 0; i < ROBOTS_NUM+1; i++)
         {
             myfile << pose_x(i) << " " << pose_y(i) << " " << pose_theta(i) << std::endl;
         }
@@ -187,6 +186,17 @@ void Controller::getPoses()
             ROS_ERROR("%s", ex.what());
         }
     }
+
+    // Publish real global position of robots
+    for (int i = 1; i < ROBOTS_NUM+1; i++)
+    {
+        geometry_msgs::Pose realpose;
+        realpose.position.x = this->pose_x(i);
+        realpose.position.y = this->pose_y(i);
+        realpose.position.z = 0.0;
+        realpose.orientation = tf::createQuaternionMsgFromYaw(this->pose_theta(i));
+        realposePub_[i-1].publish(realpose);
+    }
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,6 +207,7 @@ void Controller::Emulate_Vision(){
 
     // Update current pose of robots
     getPoses();
+
 
     // fake position for non detected robots
     geometry_msgs::Pose fake_pose;
@@ -210,10 +221,6 @@ void Controller::Emulate_Vision(){
         {   
             std::cout << "Waiting for initialization of robot " << i << std::endl;
             continue;
-        } else if (i == 2)
-        {
-            std::cout << "Skipping robot 2..." << std::endl;
-            continue;
         }
         geometry_msgs::PoseArray neighbors;
         
@@ -224,7 +231,7 @@ void Controller::Emulate_Vision(){
 
         for (int j = 1; j < ROBOTS_NUM+1; ++j)
         { 
-            if (i != j && j != 2)
+            if (i != j)
             {
                 // Vector2<double> distance_vect = {(this->pose_x[j] - this->pose_x[i]), (this->pose_y[j] - this->pose_y[i])};
                 double dist_x = this->pose_x(j) - this->pose_x(i);
@@ -265,7 +272,7 @@ void Controller::Emulate_Vision(){
         }
 
         // std::cout<<"robot "<<i<<" has "<<neighbors.poses.size()<<" neighbours"<<std::endl;
-        this->neighposePub_[i].publish(neighbors);
+        this->neighposePub_[i-1].publish(neighbors);
     }
 }
 

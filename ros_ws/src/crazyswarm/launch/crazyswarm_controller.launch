@@ -2,11 +2,11 @@
 <launch>
 
   <arg name="cf1" default="1"/>
-  <arg name="cf2" default="0"/>
-  <arg name="cf3" default="0"/>
-  <arg name="cf4" default="0"/>
-  <arg name="cf5" default="0"/>
-  <arg name="cf6" default="0"/>
+  <arg name="cf2" default="1"/>
+  <arg name="cf3" default="1"/>
+  <arg name="cf4" default="1"/>
+  <arg name="cf5" default="1"/>
+  <arg name="cf6" default="1"/>       <!-- treated as 0 -->
 
 
   <node if="$(arg cf1)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf1">
@@ -64,12 +64,13 @@
     <remap from="/go_to" to="/cf5/go_to"/>
   </node>
 
-  <node if="$(arg cf6)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf6">
+  <!-- Robot 6 becomes 0  -->
+  <node if="$(arg cf6)" name="crazyswarm_controller" pkg="crazyswarm" type="crazyswarm_controller" output="screen" ns="cf0">
     <remap from="/stop" to="/cf6/stop"/>
-    <remap from="/controller/takeoff" to="/cf6/controller/takeoff"/>
-    <remap from="/controller/land" to="/cf6/controller/land"/>
-    <remap from="/controller/go_to" to="/cf6/controller/go_to"/>
-    <remap from="/controller/cmd_vel" to="/cf6/controller/cmd_vel"/>
+    <remap from="/controller/takeoff" to="/cf0/controller/takeoff"/>
+    <remap from="/controller/land" to="/cf0/controller/land"/>
+    <remap from="/controller/go_to" to="/cf0/controller/go_to"/>
+    <remap from="/controller/cmd_vel" to="/cf0/controller/cmd_vel"/>
     <remap from="/takeoff" to="/cf6/takeoff"/>
     <remap from="/land" to="/cf6/land"/>
     <remap from="/go_to" to="/cf6/go_to"/>

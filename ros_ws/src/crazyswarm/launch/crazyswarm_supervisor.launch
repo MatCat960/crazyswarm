@@ -3,7 +3,7 @@
     <node name="crazyswarm_supervisor"  pkg="crazyswarm" type="crazyswarm_supervisor" output="screen">
         <rosparam>
             ids: [1,2,3,4]
-            ROBOTS_NUM: 4
+            ROBOTS_NUM: 6
             ROBOT_RANGE: 3.0
             AREA_SIZE_x: 3.0  
             AREA_SIZE_y: 3.0
@@ -12,5 +12,7 @@
             ROBOT_FOV: 70.0
             SAVE_POS: false
         </rosparam>
+        <remap from="/supervisor/robot6/pose" to="/supervisor/robot0/pose"/>
+        <remap from="/supervisor/robot6/realpose" to="/supervisor/robot0/realpose"/>
         </node>
     </launch>
